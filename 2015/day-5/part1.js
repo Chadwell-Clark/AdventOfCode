@@ -35,20 +35,24 @@ const DoesNotContain = (line) => {
     }
 }
 
-// !!! Three Vowels not working yet!
+//    ***Working
 const ContainsThreeVowels = (line) => {
     let vowelCount = 0
-    line.forEach(letter => {
-        if (vowels.includes(letter)) {
-            vowelCount++
-        }
-        if (vowelCount >= 3) {
-            return true
+    line.split("").reduce((vowelcount, letter) => {
+        if (vowels.indexOf(letter) === -1) {
+            vowelcount
         } else {
-            return false
+            ++vowelcount
+            ++vowelCount
         }
-    })
+    }, 0)
+    if (vowelCount >= 3) {
+        return true
+    } else {
+        return false
+    }
 }
+
 //   *** Working
 const DuplicateLetter = (line) => {
     if (DoubleLetters.some(i => line.includes(i))) {
