@@ -20,17 +20,52 @@
 
 const fs = require('fs')
 const input = fs.readFileSync('./input.txt').toString().split('\n')
+debugger
 let nice = 0
-const naughty = ["ab", "cd","pq","xy"]
-input.forEach(line => {
+const vowels = ["a", "e", "i", "o", "u"]
+const DoubleLetters = 'abcdefghijklmnopqrstuvwxyz'.split('').map(letter => letter + letter);
+const naughty = ["ab", "cd", "pq", "xy"]
 
-    let arr= line.trim()
-    if (!naughty.some(i => line.includes(i)))
-    {
-        
-        nice ++
+//   ***Working
+const DoesNotContain = (line) => {
+    if (!naughty.some(i => line.includes(i))) {
+        return true
+    } else {
+        return false
+    }
+}
+
+// !!! Three Vowels not working yet!
+const ContainsThreeVowels = (line) => {
+    let vowelCount = 0
+    line.forEach(letter => {
+        if (vowels.includes(letter)) {
+            vowelCount++
+        }
+        if (vowelCount >= 3) {
+            return true
+        } else {
+            return false
+        }
+    })
+}
+//   *** Working
+const DuplicateLetter = (line) => {
+    if (DoubleLetters.some(i => line.includes(i))) {
+        return true
+    } else {
+        return false
+    }
+}
+
+input.forEach(line => {
+    let arr = line.trim()
+    // if (DoesNotContain(arr) && ContainsThreeVowels(arr) && DuplicateLetter(arr)) {
+    if (DoesNotContain(arr) && DuplicateLetter(arr) && ContainsThreeVowels(arr)) {
+        nice++
     }
 })
+
 console.log(nice)
 
 // nice = each string has three vowels(aeiou), one letter that appears twice in a row, does not contain strings (ab, cd, pq or xy)
