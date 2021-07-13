@@ -15,61 +15,62 @@
 // dvszwmarrgswjxmb is naughty because it contains only one vowel.
 // How many strings are nice?
 
+"use strict";
 
-"use strict"
+const fs = require("fs");
+const input = fs.readFileSync("./input.txt").toString().split("\n");
 
-const fs = require('fs')
-const input = fs.readFileSync('./input.txt').toString().split('\n')
-debugger
-let nice = 0
-const vowels = ["a", "e", "i", "o", "u"]
-const DoubleLetters = 'abcdefghijklmnopqrstuvwxyz'.split('').map(letter => letter + letter);
-const naughty = ["ab", "cd", "pq", "xy"]
+let nice = 0;
+const vowels = ["a", "e", "i", "o", "u"];
+const DoubleLetters = "abcdefghijklmnopqrstuvwxyz"
+  .split("")
+  .map((letter) => letter + letter);
+const naughty = ["ab", "cd", "pq", "xy"];
 
 //   ***Working
 const DoesNotContain = (line) => {
-    if (!naughty.some(i => line.includes(i))) {
-        return true
-    } else {
-        return false
-    }
-}
+  if (!naughty.some((i) => line.includes(i))) {
+    return true;
+  } else {
+    return false;
+  }
+};
 
 //    ***Working
 const ContainsThreeVowels = (line) => {
-    let vowelCount = 0
-    line.split("").reduce((vowelcount, letter) => {
-        if (vowels.indexOf(letter) === -1) {
-            vowelcount
-        } else {
-            ++vowelcount
-            ++vowelCount
-        }
-    }, 0)
-    if (vowelCount >= 3) {
-        return true
+  let vowelCount = 0;
+  line.split("").reduce((vowelcount, letter) => {
+    if (vowels.indexOf(letter) === -1) {
+      vowelcount;
     } else {
-        return false
+      ++vowelcount;
+      ++vowelCount;
     }
-}
+  }, 0);
+  if (vowelCount >= 3) {
+    return true;
+  } else {
+    return false;
+  }
+};
 
 //   *** Working
 const DuplicateLetter = (line) => {
-    if (DoubleLetters.some(i => line.includes(i))) {
-        return true
-    } else {
-        return false
-    }
-}
+  if (DoubleLetters.some((i) => line.includes(i))) {
+    return true;
+  } else {
+    return false;
+  }
+};
 
-input.forEach(line => {
-    let arr = line.trim()
-    // if (DoesNotContain(arr) && ContainsThreeVowels(arr) && DuplicateLetter(arr)) {
-    if (DoesNotContain(arr) && DuplicateLetter(arr) && ContainsThreeVowels(arr)) {
-        nice++
-    }
-})
+input.forEach((line) => {
+  let arr = line.trim();
+  // if (DoesNotContain(arr) && ContainsThreeVowels(arr) && DuplicateLetter(arr)) {
+  if (DoesNotContain(arr) && DuplicateLetter(arr) && ContainsThreeVowels(arr)) {
+    nice++;
+  }
+});
 
-console.log(nice)
+console.log(nice);
 
 // nice = each string has three vowels(aeiou), one letter that appears twice in a row, does not contain strings (ab, cd, pq or xy)
