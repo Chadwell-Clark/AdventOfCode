@@ -41,19 +41,22 @@ let currSum = 0;
 let swapSum = 0;
 let nextSum = 0;
 // let previous = input[0];
-const slicingWindowsComparator = (arr, size) => {
+const slidingWindowsComparator = (arr, size) => {
   for (let i = 0; i < arr.length; i++) {
     // console.log(increased);
-    currSum += Number.parseInt(arr[i]);
+    currSum += Number.parseInt(arr[i]); //Start summing current number
     // console.log(`Number: ${arr[i]}`);
     if (i >= size - 1) {
-      swapSum = currSum;
+      //When you have the first three numbers summed
+      swapSum = currSum; //  swap the current sum
       //   console.log(`CurrSum: ${swapSum}`);
-      currSum -= Number.parseInt(arr[i - (size - 1)]);
+      currSum -= Number.parseInt(arr[i - (size - 1)]); //Reduce currNum by first summed amount
       if (i <= arr.length - 2) {
-        nextSum = currSum + Number.parseInt(arr[i + 1]);
+        //run until you hit last three numbers to be summed
+        nextSum = currSum + Number.parseInt(arr[i + 1]); //nextSum is reduced current num summed with next num
         // console.log(`NextSum: ${nextSum}`);
         if (nextSum > swapSum) {
+          //compare and add to increased if nextSUM is > than swapped sum
           increased++;
         }
       }
@@ -62,9 +65,9 @@ const slicingWindowsComparator = (arr, size) => {
   return increased;
 };
 
-console.log(slicingWindowsComparator(input, 3));
+console.log(slidingWindowsComparator(input, 3));
 
-// Another solution:
+// Another solution: Brute force
 let counter = 0;
 for (let i = 3; i < input.length; i++) {
   counter =
