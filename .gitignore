@@ -9,6 +9,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+input.txt
 
 # JS/Node
 .DS_*
