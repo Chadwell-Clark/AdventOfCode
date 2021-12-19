@@ -1,10 +1,10 @@
 // --- Part Two ---
-// Realizing the error of his ways, Santa has switched to a better model of determining whether a string is naughty or nice. 
+// Realizing the error of his ways, Santa has switched to a better model of determining whether a string is naughty or nice.
 // None of the old rules apply, as they are all clearly ridiculous.
 
 // Now, a nice string is one with all of the following properties:
 
-// It contains a pair of any two letters that appears at least twice in the string without overlapping, 
+// It contains a pair of any two letters that appears at least twice in the string without overlapping,
 // like xyxy (xy) or aabcdefgaa (aa), but not like aaa (aa, but it overlaps).
 // It contains at least one letter which repeats with exactly one letter between them, like xyx, abcdefeghi (efe), or even aaa.
 // For example:
@@ -14,3 +14,27 @@
 // uurcxstgmygtbstg is naughty because it has a pair (tg) but no repeat with a single letter between them.
 // ieodomkazucvgmuy is naughty because it has a repeating letter with one between (odo), but no pair that appears twice.
 // How many strings are nice under these new rules?
+
+"use strict";
+
+const fs = require("fs");
+const input = fs.readFileSync("./input.txt").toString().split("\n");
+console.log(input);
+let nice = 0;
+
+// Has repeat with single letter between ('xyx')
+const splitRepeat = (line) => {
+  line.split("");
+};
+
+//Has pair of letters that appear twice in string without overlapping ('xyxy' but not 'aaa')
+
+const containsDoubleTwice = (line) => {};
+
+input.forEach((line) => {
+  let arr = line.trim();
+  if (containsDoubleTwice(arr) && splitRepeat(arr)) {
+    nice++;
+  }
+});
+console.log(nice);
